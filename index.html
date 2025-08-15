@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">  
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exchange Rate Project</title>
+    <link rel="stylesheet" href="./src/scss/main.scss">
+    <script src="./src/js/controller.js" type='module'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body> 
+  <div class=''>
+    <header class='header container'>
+      <h3 class='logo'>exchange rate</h3>
+      <nav class='nav'>
+        <ul class="nav__list">
+          <li class="nav__item">currency</li>
+          <li class="nav__item">convert</li>
+          <li class="nav__item">historical</li>
+        </ul>
+      </nav>
+    </header>
+    <section class='exchange-rate container'>
+      <div class='header-wrapper'></div>
+      <div class='convert-currency'>
+        <form class='form-container'>
+          <div class='input-wrapper'>
+            <label for='amountFrom'>Amount</label>
+            <div class='select-currency'>
+              <input id="amountFrom" type="number" placeholder="Amount" value="1" />
+              <select id="fromCurrency" class='currencyCodes'></select>
+            </div>
+          </div>
+         
+          <div id='change-currency' class='change-currency'>
+            <i class="fa-solid fa-arrow-right-arrow-left"></i>
+          </div>
+
+          <div class='input-wrapper'>
+           <label for='amountFrom'>Convert to</label>
+           <div class='select-currency'>
+             <input id="amountTo" type="number" placeholder="Result" readonly>
+            <select id="toCurrency" class='currencyCodes'></select> 
+            </input>
+                         
+           </div>
+          </div>
+        </form>
+    </div>
+    </section>
+    <section class='history'>
+      <div class='header-wrapper'>
+        <h2 class='heading-exchange'>Historical rate tables</h2>
+        <p class='description-exchange'>Build historic rate tables with your chosen base currency with XE Currency Tables.</p>
+      </div>
+      
+        <div class='history-currency'>
+          <div class='input-wrapper'>
+            <input id="date" type="date" />
+            <select id="codeCurrency" class='currencyCodes'></select>
+          </div>
+        </div>
+    </section>
+    <section class='compare'>
+      <div class='header-wrapper'>
+        <h2 class='heading-exchange'>Latest Compare with Top currencies</h2>
+        <p class='description-exchange'>Build historic rate tables with your chosen base currency with XE Currency Tables.</p>
+      </div>
+      <div class='input-wrapper'>
+        <input id="search" type="text" />
+        <select class='currencyCodes'></select>
+      </div>
+      <div class='compare-currency'>
+
+      </div>
+    </section>
+    </section>
+  </div> 
+  <footer class="footer"></footer>
+</body>
+</html>

@@ -1,0 +1,64 @@
+@use 'base' as base;
+
+.history {
+  background-color: base.$color-bg-light;
+  padding: 4rem 14rem;
+  text-align: center;
+  justify-items: center;
+
+  .header-wrapper {
+    color: $color-text-dark;
+    margin: 2rem 0 4rem 0;
+
+    .description-exchange {
+      font-size: 1.6rem;
+    }
+  }
+
+  .input-wrapper {
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+
+    input {
+      border-radius: 1rem;
+      width: 25rem;
+      height: 5rem;
+      padding: 1rem 2rem;
+      font-size: 2rem;
+      font-weight: 600;
+      position: relative;
+    }
+
+    select {
+      border-radius: 1rem;
+      font-size: 2rem;
+      font-weight: 600;
+      padding: 0 1rem;
+      border: 2px solid;
+    }
+  }
+
+  table {
+    color: base.$color-text-dark;
+    font-size: 1.6rem;
+    border-collapse: separate;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+
+    th {
+      border-bottom: 2px solid base.$color-text-dark;
+      border-right: 2px solid base.$color-text-dark;
+      padding: 0 0.5rem;
+      text-transform: capitalize;
+    }
+
+    td {
+      border-bottom: 2px solid base.$color-text-dark;
+      border-right: 2px solid base.$color-text-dark;
+      padding: 0 1rem;
+    }
+  }
+}

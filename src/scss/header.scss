@@ -1,0 +1,27 @@
+.header {
+  padding: 1.4rem 4rem;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  .logo {
+    text-transform: uppercase;
+  }
+
+  .nav {
+    padding: 0 1.5rem;
+
+    &__list {
+      list-style: none;
+
+      display: flex;
+      flex-direction: row;
+      gap: 4rem;
+      align-items: center;
+      font-size: 1.999rem;
+      text-transform: capitalize;
+    }
+  }
+}

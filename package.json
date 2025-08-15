@@ -1,0 +1,17 @@
+{
+  "name": "exchange-rate-project",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html "
+  },
+  "author": "Trung Nguyen",
+  "license": "ISC",
+  "dependencies": {
+    "parcel": "^2.15.4"
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.15.4"
+  }
+}

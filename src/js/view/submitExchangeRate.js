@@ -44,13 +44,12 @@ class SubmitExchangeRate extends View {
       })
     })
 
-    // Nếu là lần render đầu tiên thì fix default USD/VND
+
     if (this._firstRender) {
       fromEl.value = 'USD'
       toEl.value = 'VND'
       this._firstRender = false
     } else {
-      // giữ giá trị cũ nếu có
       fromEl.value = currentFrom || this._data?.base_code || 'USD'
       toEl.value = currentTo || this._data?.target_code || 'VND'
     }
@@ -61,14 +60,14 @@ class SubmitExchangeRate extends View {
     const fromCurrencyEl = this._parentElement.querySelector('#fromCurrency')
     const toCurrencyEl = this._parentElement.querySelector('#toCurrency')
 
-    // nhập số amount → chỉ tính toán lại, không call API
+
     this._parentElement.addEventListener('input', (e) => {
       if (e.target.id === 'amountFrom') {
         this._displayResult(this._data)
       }
     })
 
-    // đổi from/to code → call API
+
     this._parentElement.addEventListener('change', (e) => {
       if (e.target.id === 'fromCurrency' || e.target.id === 'toCurrency') {
         const fromCurrencyEl =
@@ -82,24 +81,24 @@ class SubmitExchangeRate extends View {
       }
     })
 
-    // swap nút đổi chỗ → call API
+
     this._parentElement.addEventListener('click', (e) => {
       if (e.target.closest('#change-currency')) {
         e.preventDefault()
 
-        // hoán đổi from/to
+
         const temp = fromCurrencyEl.value
         fromCurrencyEl.value = toCurrencyEl.value
         toCurrencyEl.value = temp
 
-        // hoán đổi amount
+
         const tempAmount =
           this._parentElement.querySelector('#amountFrom').value
         this._parentElement.querySelector('#amountFrom').value =
           this._parentElement.querySelector('#amountTo').value
         this._parentElement.querySelector('#amountTo').value = tempAmount
 
-        // gọi handler kèm amount
+
         handler({
           from: fromCurrencyEl.value,
           to: toCurrencyEl.value,
@@ -147,12 +146,9 @@ class SubmitExchangeRate extends View {
     const markup = this._generateMarkup()
     this._parentElement.innerHTML = markup
 
-    // chỉ fill options nếu đã có codes
     if (this._codes && this._codes.length > 0) {
       this.renderCurrencyOptions(this._codes)
     }
-
-    // update kết quả tính toán
     this._displayResult(data)
   }
 

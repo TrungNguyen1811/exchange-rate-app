@@ -1,55 +1,70 @@
 # Exchange Rate Project
 
-## Mô tả
-Dự án **Exchange Rate** là một ứng dụng web hiển thị và so sánh tỷ giá các loại tiền tệ phổ biến, giúp người dùng:  
+## 1. Project Goal
+**Exchange Rate** is a web application that displays and compares popular currency exchange rates.  
+Main objectives:  
 
-- Xem tỷ giá hối đoái theo ngày.  
-- So sánh tỷ giá giữa các quốc gia hoặc các loại tiền tệ hàng đầu.  
-- Xem lịch sử tỷ giá.  
+- Display daily currency exchange rates.  
+- Compare exchange rates between countries or top currencies.  
+- View historical exchange rates by datetime.  
 
-Ứng dụng được xây dựng bằng **JavaScript**, **Parcel**, và cấu trúc module rõ ràng.
+The application is built with **JavaScript** and **Parcel**, using a **modular structure** for easy maintenance and scalability.
 
 ---
 
-## Cấu trúc thư mục
+## 2. Architecture & Folder Structure main
 
 src/
 ├─ js/
-│ ├─ controller.js
-│ ├─ model.js
-│ └─ view/
-│ ├─ compareRateNation.js # So sánh tỷ giá giữa các quốc gia
-│ ├─ submitExchangeRate.js # Form gửi tỷ giá hối đoái
-│ ├─ submitTimeHistory.js # Form lưu lịch sử tỷ giá
-│ └─ View.js # Base class cho các view component
-└─ index.html
+│ ├─ controller.js # Manages app flow, connects View & Model
+│ ├─ model.js # Handles API requests, data processing, and rate calculations
+│ └─ view/ # UI components
+│ ├─ compareRateNation.js # Compare exchange rates between countries
+│ ├─ submitExchangeRate.js # Form to submit new exchange rates
+│ ├─ submitTimeHistory.js # Form to submit historical rate data
+│ └─ View.js # Base class for view components
+└─ index.html # Entry point of the application
+
+**Workflow:**
+
+1. Users interact with the UI (`view`).  
+2. `controller.js` handles events and communicates with `model.js` for data processing.  
+3. Results are returned to the `view` for display.
 
 ---
 
-## Module chính
+## 3. Key Modules
 
-- **controller.js**: Quản lý kết nối các module view và model.  
-- **model.js**: Xử lý dữ liệu, API và tính toán tỷ giá.  
-- **view/**: Chứa các component giao diện và logic hiển thị:
-  - `compareRateNation.js`: So sánh tỷ giá giữa các quốc gia.  
-  - `submitExchangeRate.js`: Gửi tỷ giá mới.  
-  - `submitTimeHistory.js`: Gửi lịch sử tỷ giá.  
-  - `View.js`: Base class cho các view component.  
+| Module | Function |
+|--------|---------|
+| `controller.js` | Coordinates data flow between view and model |
+| `model.js` | Handles API calls, data processing, and rate calculations |
+| `view/compareRateNation.js` | Compares exchange rates between countries |
+| `view/submitExchangeRate.js` | Form to submit new exchange rates |
+| `view/submitTimeHistory.js` | Form to submit historical exchange rates |
+| `view/View.js` | Base class for view components |
 
 ---
 
-## Cài đặt & chạy dự án
+## 4. Installation & Running
 
-1. Cài đặt dependencies:
+1. Install dependencies:
 npm install
 
-Chạy ở chế độ phát triển:
+Run in development mode:
 npm run dev
 
-Build để deploy:
+Build the project for deployment:
 npm run build
 
-
-Xóa cache Parcel nếu gặp lỗi build:
+Clear Parcel cache if build errors occur:
 rm -rf .parcel-cache
 npm run build
+
+---
+
+## 5. Important Notes
+- Parcel is case-sensitive, especially on Linux/Mac and Vercel.
+- Always run builds from the project root for imports to work correctly.
+- Clear the Parcel cache when renaming files or changing folder structure.
+- Modules follow the Single Responsibility Principle for easy extension and maintenance.

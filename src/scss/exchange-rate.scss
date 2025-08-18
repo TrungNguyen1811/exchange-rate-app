@@ -156,4 +156,10 @@
       height: 75%;
     }
   }
+
+  @media screen and (max-width: 575) {
+    .convert-currency {
+      width: 48rem;
+    }
+  }
 }

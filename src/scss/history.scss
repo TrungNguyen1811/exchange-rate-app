@@ -1,0 +1,200 @@
+@use 'base' as base;
+
+.history {
+  background-color: base.$color-bg-light;
+  padding: 12rem 14rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-content: space-between;
+  gap: 9.4rem;
+
+  &__header {
+    color: $color-text-dark;
+  }
+
+  &__heading {
+    font-size: 3.2rem;
+    margin-bottom: 1.6rem;
+  }
+
+  &__description {
+    font-size: 1.4rem;
+  }
+
+  &__currency {
+    background-color: $color-bg-dark;
+    border-radius: 3rem;
+    padding: 2.4rem;
+    width: 85%;
+    margin-left: 6.4rem;
+
+    p {
+      font-size: 2rem;
+      text-align: center;
+      font-weight: 600;
+      margin-bottom: 3.2rem;
+    }
+  }
+
+  &__input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 0 2.4rem;
+    margin-bottom: 2rem;
+
+    &--display {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+
+      label {
+        font-size: 2rem;
+      }
+
+      .history__codes {
+        height: 4.8rem;
+        background-color: $color-bg-light;
+      }
+
+      .history__input {
+        height: 4.8rem;
+        width: 100%;
+        border-radius: 1rem;
+        padding: 1rem 2rem;
+        font-size: 2rem;
+        font-weight: 600;
+        position: relative;
+        background-color: $color-bg-light;
+      }
+    }
+
+    button {
+      height: 4.8rem;
+      border-radius: 1rem;
+      margin-top: 2.4rem;
+      background-color: $color-bg-light;
+      font-weight: 600;
+      font-size: 1.6rem;
+      cursor: pointer;
+      border: 2px solid $color-border;
+      color: $color-text-dark;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: $color-primary; // đổi màu nền khi hover
+        color: $color-text-light; // chữ sáng trên nền chính
+        border-color: $color-primary-dark; // đổi viền
+        transform: translateY(-2px); // hiệu ứng nổi lên nhẹ
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); // đổ bóng
+      }
+
+      &:active {
+        transform: translateY(0); // khi nhấn xuống thì hạ về
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+    }
+
+    select {
+      border-radius: 1rem;
+      font-size: 2rem;
+      font-weight: 600;
+      padding: 0 1rem;
+      border: 2px solid;
+    }
+  }
+
+  &__table {
+    background-color: $color-bg-dark;
+    padding: 2.4rem 14rem;
+
+    h3 {
+      text-align: center;
+      margin-bottom: 2.4rem;
+      font-size: 3.6rem;
+    }
+
+    table {
+      color: $color-text-light;
+      font-size: 1.6rem;
+      border-collapse: separate;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      text-align: center;
+      font-size: 2rem;
+
+      th {
+        font-size: 1.6rem;
+        border-bottom: 2px solid $color-border;
+        border-right: 2px solid $color-border;
+        padding: 0.75rem;
+        text-transform: uppercase;
+      }
+
+      td {
+        border-bottom: 2px solid $color-border;
+        border-right: 2px solid $color-border;
+        padding: 0.25rem;
+      }
+
+      td:hover {
+        background-color: $color-primary;
+        color: $color-bg-light;
+        cursor: pointer;
+      }
+
+      td:first-child {
+        color: $color-primary;
+        font-weight: 600;
+      }
+    }
+
+    .history__pagination {
+      text-align: center;
+      margin: 2rem;
+
+      .next,
+      .prev {
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        background-color: $color-bg-light;
+      }
+
+      span {
+        font-size: 1.2rem;
+      }
+    }
+  }
+
+  @media screen and (max-width: 1440) {
+    padding: 4.8rem 8rem;
+
+    .history__currency {
+      margin-left: 0;
+      width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 1024) {
+    padding: 4.8rem 4rem;
+    gap: 2rem;
+
+    .history__currency {
+      margin-left: 0;
+      width: 100%;
+    }
+
+    .history__table {
+      padding: 4rem 4rem;
+    }
+  }
+}
+
+@media screen and (max-width: 768) {
+  .history__table {
+    padding: 4rem 4rem;
+  }
+}

@@ -1,36 +1,58 @@
-// submitExchangeRate.js
 import View from './View.js'
 
 class SubmitExchangeRate extends View {
   _parentElement = document.querySelector('.convert-currency')
   _errorMessage = 'Something went wrong. Please try again.'
   _cachedRate = null
-
   _firstRender = true
+  _codes = []
+
+  getCurrencySymbol(code, locale = 'en-US') {
+    return (0)
+      .toLocaleString(locale, {
+        style: 'currency',
+        currency: code,
+        currencyDisplay: 'symbol',
+      })
+      .replace(/\d|[.,\s]/g, '')
+      .trim()
+  }
+
+  formatCurrency(code) {
+    const symbol = this.getCurrencySymbol(code)
+    return `${symbol}`
+  }
 
   renderCurrencyOptions(codes) {
+    if (!codes || codes.length === 0) return
+
+    this._codes = codes
     const fromEl = this._parentElement.querySelector('#fromCurrency')
     const toEl = this._parentElement.querySelector('#toCurrency')
+
+    if (!fromEl || !toEl) return
 
     const currentFrom = fromEl.value
     const currentTo = toEl.value
 
-    const datalist = document.querySelectorAll('.currencyCodes')
-    datalist.forEach((data) => {
-      data.innerHTML = ''
+    const selects = this._parentElement.querySelectorAll('.currencyCodes')
+    selects.forEach((select) => {
+      select.innerHTML = ''
       codes.forEach(({ code }) => {
         const option = `<option value="${code}">${code}</option>`
-        data.insertAdjacentHTML('beforeend', option)
+        select.insertAdjacentHTML('beforeend', option)
       })
     })
 
+    // Nếu là lần render đầu tiên thì fix default USD/VND
     if (this._firstRender) {
       fromEl.value = 'USD'
       toEl.value = 'VND'
       this._firstRender = false
     } else {
-      fromEl.value = currentFrom
-      toEl.value = currentTo
+      // giữ giá trị cũ nếu có
+      fromEl.value = currentFrom || this._data?.base_code || 'USD'
+      toEl.value = currentTo || this._data?.target_code || 'VND'
     }
   }
 
@@ -38,34 +60,104 @@ class SubmitExchangeRate extends View {
     const amountFromEl = this._parentElement.querySelector('#amountFrom')
     const fromCurrencyEl = this._parentElement.querySelector('#fromCurrency')
     const toCurrencyEl = this._parentElement.querySelector('#toCurrency')
-    const swapBtn = document.querySelector('#change-currency')
 
-    const update = () => {
-      handler({
-        from: fromCurrencyEl.value,
-        to: toCurrencyEl.value,
-      })
-    }
+    // nhập số amount → chỉ tính toán lại, không call API
+    this._parentElement.addEventListener('input', (e) => {
+      if (e.target.id === 'amountFrom') {
+        this._displayResult(this._data)
+      }
+    })
 
-    amountFromEl.addEventListener('input', update)
-    fromCurrencyEl.addEventListener('change', update)
-    toCurrencyEl.addEventListener('change', update)
+    // đổi from/to code → call API
+    this._parentElement.addEventListener('change', (e) => {
+      if (e.target.id === 'fromCurrency' || e.target.id === 'toCurrency') {
+        const fromCurrencyEl =
+          this._parentElement.querySelector('#fromCurrency')
+        const toCurrencyEl = this._parentElement.querySelector('#toCurrency')
 
-    swapBtn.addEventListener('click', (e) => {
-      e.preventDefault()
-      const temp = fromCurrencyEl.value
-      fromCurrencyEl.value = toCurrencyEl.value
-      toCurrencyEl.value = temp
-      update()
+        handler({
+          from: fromCurrencyEl.value,
+          to: toCurrencyEl.value,
+        })
+      }
+    })
+
+    // swap nút đổi chỗ → call API
+    this._parentElement.addEventListener('click', (e) => {
+      if (e.target.closest('#change-currency')) {
+        e.preventDefault()
+
+        // hoán đổi from/to
+        const temp = fromCurrencyEl.value
+        fromCurrencyEl.value = toCurrencyEl.value
+        toCurrencyEl.value = temp
+
+        // hoán đổi amount
+        const tempAmount =
+          this._parentElement.querySelector('#amountFrom').value
+        this._parentElement.querySelector('#amountFrom').value =
+          this._parentElement.querySelector('#amountTo').value
+        this._parentElement.querySelector('#amountTo').value = tempAmount
+
+        // gọi handler kèm amount
+        handler({
+          from: fromCurrencyEl.value,
+          to: toCurrencyEl.value,
+        })
+      }
     })
   }
 
-  render(rate) {
-    this._displayResult(rate)
+  _generateMarkup() {
+    return `
+      <div class="exchange-rate__mid-market">
+        <p>Mid-market exchange data</p>
+        <p>${this.formatCurrency(this._data.base_code)} 1 ${
+      this._data.base_code
+    } = ${this._data.conversion_rate} ${this._data.target_code}</p>
+      </div>
+      <form class='form-container'>
+        <div class='input-wrapper'>
+          <label for='amountFrom'>Amount</label>
+          <div class='select-currency'>
+            <input id="amountFrom" type="number" placeholder="Amount" value="${
+              this._parentElement.querySelector('#amountFrom').value || 1
+            }" />
+            <select id="fromCurrency" class='currencyCodes'></select>
+          </div>
+        </div>
+
+        <div id='change-currency' class='change-currency'>
+          <i class="fa-solid fa-arrow-right-arrow-left"></i>
+        </div>
+
+        <div class='input-wrapper'>
+          <label for='amountTo'>Convert to</label>
+          <div class='select-currency'>
+            <input id="amountTo" type="number" placeholder="Result" readonly>
+            <select id="toCurrency" class='currencyCodes'></select>
+          </div>
+        </div>
+      </form>
+    `
   }
 
-  _displayResult(rate) {
-    if (!rate || !rate.conversion_rate) return
+  render(data) {
+    this._data = data
+    const markup = this._generateMarkup()
+    this._parentElement.innerHTML = markup
+
+    // chỉ fill options nếu đã có codes
+    if (this._codes && this._codes.length > 0) {
+      this.renderCurrencyOptions(this._codes)
+    }
+
+    // update kết quả tính toán
+    this._displayResult(data)
+  }
+
+  _displayResult(data) {
+    if (!data || !data.conversion_rate) return
 
     const amountFromEl = this._parentElement.querySelector('#amountFrom')
     const amountToEl = this._parentElement.querySelector('#amountTo')
@@ -73,7 +165,7 @@ class SubmitExchangeRate extends View {
     if (!amountFromEl || !amountToEl) return
 
     const from = parseFloat(amountFromEl.value) || 0
-    const result = from * rate.conversion_rate
+    const result = from * data.conversion_rate
     amountToEl.value = result.toFixed(2)
   }
 }

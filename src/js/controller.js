@@ -2,7 +2,7 @@
 import submitExchangeRate from './view/submitExchangeRate.js'
 import submitTimeHistory from './view/submitTimeHistory.js'
 import compareRateNation from './view/compareRateNation.js'
-import header from './view/header.js'
+import header from './effect/exchangeRateHeader.js'
 import * as model from './model.js'
 
 if (module.hot) {
@@ -14,8 +14,9 @@ const controlLoadCurrencyCodes = async function () {
     await model.supportCodeCurrency()
     submitExchangeRate.renderCurrencyOptions(model.state.codes.supported_codes)
     submitTimeHistory.renderCurrencyOptions(model.state.codes.supported_codes)
+    compareRateNation.renderCurrencyOptions(model.state.codes.supported_codes)
   } catch (err) {
-    console.error(err)
+    throw err
   }
 }
 
@@ -28,7 +29,7 @@ const controlExchangeRate = async function (base) {
       await model.convertCurrency(base.from, base.to)
       header.render(model.state.pair_currency)
     }
-    submitExchangeRate.render(model.state.pair_currency, false)
+    submitExchangeRate.render(model.state.pair_currency)
   } catch (err) {
     submitExchangeRate.renderError(err.message)
   }
@@ -46,7 +47,6 @@ const controlTimeHistory = async function (base) {
 const controlCompareRate = async function (base) {
   try {
     await model.lastCurrency(base)
-
     compareRateNation.render(model.state.last_currency)
   } catch (error) {
     compareRateNation.renderError(error.message)
@@ -55,9 +55,11 @@ const controlCompareRate = async function (base) {
 
 const init = async function () {
   await controlLoadCurrencyCodes()
-  controlExchangeRate({ from: 'USD', to: 'VND', amount: 1 })
+  controlExchangeRate({ from: 'USD', to: 'VND' })
   submitExchangeRate.addHandlerExchangeRate(controlExchangeRate)
   submitTimeHistory.addHandlerTimeHistory(controlTimeHistory)
+  compareRateNation.addHandlerSelect(controlCompareRate)
+  controlCompareRate('USD')
 }
 
 init()

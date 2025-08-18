@@ -1,0 +1,233 @@
+@use 'base.scss';
+
+.compare {
+  padding: 3.6rem 12rem 4.8rem;
+  min-height: 50rem;
+  background-color: $color-bg-light;
+  color: $color-text-dark;
+  min-height: 62rem;
+
+  &__header {
+    text-align: center;
+    padding: 0 16rem;
+  }
+
+  &__heading {
+    font-size: 3.6rem;
+    margin-bottom: 2.4rem;
+  }
+
+  &__description {
+    font-size: 1.6rem;
+  }
+
+  &__currency {
+    display: flex;
+    gap: 3.6rem;
+    margin: 3.6rem;
+  }
+
+  table {
+    color: $color-text-dark;
+    font-size: 1.6rem;
+    border-collapse: separate;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 2rem;
+    width: 100%;
+
+    th {
+      font-size: 1.6rem;
+      border-bottom: 2px solid $color-border;
+      border-right: 2px solid $color-border;
+      padding: 1rem 4.8rem;
+      text-transform: uppercase;
+    }
+
+    td {
+      border-bottom: 2px solid $color-border;
+      border-right: 2px solid $color-border;
+      padding: 0.25rem;
+    }
+
+    td:hover {
+      background-color: $color-primary;
+      color: $color-bg-light;
+      cursor: pointer;
+    }
+
+    td:first-child {
+      color: $color-primary;
+      font-weight: 600;
+    }
+  }
+
+  @media screen and (max-width: 1440) {
+    padding: 4.8rem 8rem;
+
+    &__header {
+      padding: 0 8rem;
+    }
+
+    .compare__currency {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .compare-table {
+      overflow-x: scroll;
+    }
+  }
+
+  @media screen and (max-width: 1024) {
+    padding: 2.4rem 2.4rem;
+
+    &__header {
+      padding: 0 4rem;
+    }
+
+    &__heading {
+      margin-bottom: 1.6rem;
+      font-size: 2.4rem;
+    }
+
+    .compare__currency {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .compare-table {
+      overflow-x: scroll;
+    }
+  }
+}
+
+.customInputContainer {
+  width: 20rem;
+  display: flex;
+  max-width: 20rem;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.customInputContainer .customInput {
+  margin: 0 1rem;
+  cursor: pointer;
+  user-select: none;
+  font-size: 1.6rem;
+  justify-content: space-between;
+  padding: 0.6rem 1rem 0.6rem 0.6rem;
+}
+
+.customInputContainer .customInput i {
+  transition: transform 0.3s ease-in-out;
+}
+
+.customInputContainer.show .customInput i {
+  transform: rotate(90deg);
+}
+
+.customInputContainer :is(.customInput, .options) {
+  width: 100%;
+  display: flex;
+  color: #202020;
+  background: #fff;
+  align-items: center;
+  border-radius: 0.3rem;
+}
+
+.customInputContainer .options {
+  display: none;
+  padding: 0.6rem;
+  font-size: 1.1rem;
+  justify-content: start;
+  flex-direction: column;
+  margin: 0.8rem 1rem 0rem 1rem;
+  transition: background-color 0.1s ease-in-out;
+}
+
+.customInputContainer.show .options {
+  display: block;
+}
+
+.customInputContainer .options :is(.searchInput, ul) {
+  width: 100%;
+  max-height: 15rem;
+  overflow-y: scroll;
+  position: relative;
+}
+
+.customInputContainer .options ul::-webkit-scrollbar {
+  width: 6px;
+  position: relative;
+}
+
+.customInputContainer .options ul::-webkit-scrollbar-track {
+  width: 2px;
+  border-radius: 0.2rem;
+  background: rgb(0 0 0 / 10%);
+}
+
+.customInputContainer .options ul::-webkit-scrollbar-thumb {
+  border-radius: 0.2rem;
+  background: rgb(0 0 0 / 30%);
+}
+
+.customInputContainer .options .searchInput {
+  display: flex;
+  padding: 0 0.4rem;
+  overflow-y: auto;
+  align-items: center;
+  border-radius: 0.4rem;
+  color: rgb(0 0 0 / 50%);
+  border: 2px solid rgb(0 0 0 / 30%);
+}
+
+.customInputContainer .options .searchInput.focus {
+  border: 2px solid rgb(52 211 153 / 70%);
+}
+
+.customInputContainer .options .searchInput input[type='text'] {
+  border: 0;
+  width: 100%;
+  outline: none;
+  height: 2.5rem;
+  font-size: 1rem;
+  padding: 0 0.4rem;
+  border-radius: 0.4rem;
+}
+
+.customInputContainer .options .searchInput input[type='text']::placeholder {
+  font-size: 1rem;
+  color: rgb(0 0 0 / 50%);
+}
+
+.customInputContainer .options ul {
+  margin: 0.5rem 0;
+}
+
+.customInputContainer .options ul li {
+  cursor: pointer;
+  list-style: none;
+  padding: 0.4rem 0.4rem;
+  border-bottom: 1px solid rgb(204 204 204 / 50%);
+}
+
+.customInputContainer .options ul li.selected {
+  background: rgb(52 211 153 / 50%);
+}
+
+.customInputContainer .options ul li.selected:hover {
+  background: rgb(52 211 153 / 50%);
+}
+
+.customInputContainer .options ul li:last-child {
+  border: 0;
+}
+
+.customInputContainer .options ul li:hover {
+  background: rgb(52 211 153 / 20%);
+}

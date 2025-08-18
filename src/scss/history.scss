@@ -210,4 +210,14 @@
       text-align: start;
     }
   }
+
+  .history__table table {
+    font-size: 1.6rem;
+  }
+
+  .table__history {
+    overflow-x: scroll;
+    display: block;
+    white-space: nowrap;
+  }
 }

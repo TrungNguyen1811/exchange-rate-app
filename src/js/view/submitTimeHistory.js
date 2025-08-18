@@ -21,7 +21,7 @@ class SubmitTimeHistory extends View {
 
     return `
       <h3>Currency Table: ${this._data.base}</h3>
-      <table class='table-history'>
+      <table class='table__history'>
           <thead>
             <tr class='table-header'>
               <th>currency code</th>

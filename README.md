@@ -51,13 +51,13 @@ src/
 1. Install dependencies:
 npm install
 
-Run in development mode:
+2. Run in development mode:
 npm run dev
 
-Build the project for deployment:
+3. Build the project for deployment:
 npm run build
 
-Clear Parcel cache if build errors occur:
+4. Clear Parcel cache if build errors occur:
 rm -rf .parcel-cache
 npm run build
 

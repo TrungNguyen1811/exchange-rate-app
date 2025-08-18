@@ -68,3 +68,4 @@ npm run build
 - Always run builds from the project root for imports to work correctly.
 - Clear the Parcel cache when renaming files or changing folder structure.
 - Modules follow the Single Responsibility Principle for easy extension and maintenance.
+

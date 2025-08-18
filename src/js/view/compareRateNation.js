@@ -1,6 +1,5 @@
 // compareRateNation.js
 import View from './View'
-import * as model from '../model'
 import { debounce } from '../helper'
 
 class CompareRateNation extends View {

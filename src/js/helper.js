@@ -31,3 +31,11 @@ export const getNameCurrency = (code) => {
   )
   return currency ? currency.name : ''
 }
+
+export function debounce(fn, delay = 250) {
+  let timeout
+  return (...args) => {
+    clearTimeout(timeout)
+    timeout = setTimeout(() => fn(...args), delay)
+  }
+}

@@ -18,7 +18,7 @@ const createLastCurrency = function (data) {
     time_next_update_unix: data.time_next_update_unix,
     time_next_update_utc: data.time_next_update_utc,
     base_code: data.base_code,
-    conversion_rate: data.conversion_rate,
+    conversion_rates: data.conversion_rates,
   }
 }
 

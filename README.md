@@ -14,16 +14,8 @@ The application is built with **JavaScript** and **Parcel**, using a **modular s
 
 ## 2. Architecture & Folder Structure main
 
-src/
-├─ js/
-│ ├─ controller.js # Manages app flow, connects View & Model
-│ ├─ model.js # Handles API requests, data processing, and rate calculations
-│ └─ view/ # UI components
-│ ├─ compareRateNation.js # Compare exchange rates between countries
-│ ├─ submitExchangeRate.js # Form to submit new exchange rates
-│ ├─ submitTimeHistory.js # Form to submit historical rate data
-│ └─ View.js # Base class for view components
-└─ index.html # Entry point of the application
+<img width="653" height="296" alt="image" src="https://github.com/user-attachments/assets/f111637a-8290-41a7-b2fa-ef6a743b7ff5" />
+
 
 **Workflow:**
 

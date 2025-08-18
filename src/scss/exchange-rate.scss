@@ -155,11 +155,15 @@
     .select-currency .currencyCodes {
       height: 75%;
     }
+
+    .convert-currency {
+      width: 75%;
+    }
   }
 
   @media screen and (max-width: 575) {
     .convert-currency {
-      width: 48rem;
+      width: 90%;
     }
   }
 }
